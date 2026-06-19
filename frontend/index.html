@@ -1,232 +1,284 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mini Hack Cohort 1</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: "Courier New", monospace;
-      background: #0a0a0a;
-      color: #e0e0e0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-
-    h1 {
-      font-size: 1.5rem;
-      color: #e84142;
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.05em;
-    }
-
-    p.subtitle {
-      font-size: 0.85rem;
-      color: #666;
-      margin-bottom: 2rem;
-    }
-
-    .card {
-      background: #111;
-      border: 1px solid #222;
-      border-radius: 8px;
-      padding: 2rem;
-      width: 100%;
-      max-width: 480px;
-    }
-
-    .status {
-      font-size: 0.8rem;
-      color: #666;
-      margin-bottom: 1.5rem;
-      padding: 0.75rem;
-      background: #0d0d0d;
-      border-radius: 4px;
-      border-left: 3px solid #e84142;
-    }
-
-    .status.connected {
-      border-left-color: #22c55e;
-      color: #22c55e;
-    }
-
-    button {
-      width: 100%;
-      padding: 0.85rem;
-      background: #e84142;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      cursor: pointer;
-      margin-bottom: 1rem;
-      transition: background 0.15s;
-    }
-
-    button:hover { background: #c73535; }
-    button:disabled { background: #333; color: #666; cursor: not-allowed; }
-
-    .data-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid #1a1a1a;
-      color: #999;
-    }
-
-    .data-row span:last-child { color: #e0e0e0; word-break: break-all; text-align: right; max-width: 60%; }
-
-    #log {
-      margin-top: 1.5rem;
-      font-size: 0.75rem;
-      color: #444;
-      max-height: 120px;
-      overflow-y: auto;
-    }
-
-    #log p { padding: 0.2rem 0; }
-    #log p.success { color: #22c55e; }
-    #log p.error { color: #e84142; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="K-ELF provides plain-language, Kenyan-law-compliant investment and founder agreements built for the real East African startup environment.">
+  <title>K-ELF — Kenyan Equity Legal Framework</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
 </head>
 <body>
 
-  <h1>Mini Hack Cohort 1</h1>
-  <p class="subtitle">Payments on Avalanche — Fuji Testnet</p>
-
-  <div class="card">
-    <div class="status" id="status">Not connected</div>
-
-    <button id="connectBtn">Connect Core Wallet</button>
-    <button id="balanceBtn" disabled>Get Balance</button>
-
-    <div id="walletData" style="display:none;">
-      <div class="data-row">
-        <span>Address</span>
-        <span id="address">--</span>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-name">K-ELF</span>
+      </a>
+      <div class="nav-links">
+        <a href="#problem">The Problem</a>
+        <a href="#how">How It Works</a>
+        <a href="#documents">Documents</a>
       </div>
-      <div class="data-row">
-        <span>Network</span>
-        <span id="network">--</span>
-      </div>
-      <div class="data-row">
-        <span>Balance</span>
-        <span id="balance">--</span>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+          <span class="sun">Light</span><span class="moon">Dark</span>
+        </button>
+        <a href="generator.html" class="cta-btn-nav">Open Generator</a>
       </div>
     </div>
+  </nav>
 
-    <div id="log"></div>
-  </div>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-flag">
+        <div class="flag-bar black"></div>
+        <div class="flag-bar red"></div>
+        <div class="flag-bar green"></div>
+      </div>
+      <div class="hero-eyebrow">Built for Kenya. Written for Founders.</div>
+      <h1 class="hero-headline">
+        Legal agreements that<br>
+        <span class="hero-highlight">actually work here.</span>
+      </h1>
+      <p class="hero-sub">
+        Most startup investment documents used in Kenya are imported from the US and do not fit the local legal environment. K-ELF gives you plain-language, court-alternative agreements built around the Kenyan Companies Act, 2015.
+      </p>
+      <div class="hero-actions">
+        <a href="generator.html" class="btn-primary-lg">Generate Your Agreement</a>
+        <a href="#problem" class="btn-ghost-lg">Learn Why This Matters</a>
+      </div>
+      <div class="hero-stat-row">
+        <div class="hero-stat">
+          <strong>2</strong>
+          <span>Core Documents</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <strong>0</strong>
+          <span>Lawyer Required</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <strong>30-Day</strong>
+          <span>Dispute Arbitration</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <section class="problem" id="problem">
+    <div class="section-inner">
+      <div class="section-label">The Problem</div>
+      <h2 class="section-title">Why imported templates fail Kenyan founders</h2>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon-label">US to KE</div>
+          <h3>Delaware Logic in Nairobi</h3>
+          <p>US SAFE templates reference "authorized shares" and "capital stock" — concepts that do not exist under the Kenyan Companies Act, 2015. The documents are legally meaningless here.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon-label">3 to 5 Years</div>
+          <h3>Courts Are Not a Real Option</h3>
+          <p>Standard contracts rely on the threat of court action. In Kenya, commercial litigation takes years and costs more than the original investment. The deterrent does not work.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon-label">No Guard</div>
+          <h3>No Siphoning Protection</h3>
+          <p>Founders can drain capital through inflated salaries, related-party contracts, or by moving IP to a personal company. US templates have no guardrails for this reality.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon-label">60 Pages</div>
+          <h3>Documents Nobody Reads</h3>
+          <p>Founders sign documents they do not understand. Investors use templates too complex to adapt. The paperwork becomes a liability, not a protection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution">
+    <div class="section-inner solution-inner">
+      <div class="solution-text">
+        <div class="section-label">The Solution</div>
+        <h2 class="section-title">Written for how Kenya actually works</h2>
+        <ul class="solution-list">
+          <li>
+            <div class="sol-icon"></div>
+            <div>
+              <strong>Kenyan Companies Act, 2015 compliant</strong>
+              <p>Uses correct legal concepts like share allotment, Form CR2 and CR18, and stamp duty — not Delaware terminology.</p>
+            </div>
+          </li>
+          <li>
+            <div class="sol-icon"></div>
+            <div>
+              <strong>Anti-siphoning clauses built in</strong>
+              <p>Founder salary caps, M-Pesa dual-signatory thresholds, and a personal fraud guarantee that pierces the corporate veil.</p>
+            </div>
+          </li>
+          <li>
+            <div class="sol-icon"></div>
+            <div>
+              <strong>30-day Med-Arb, no courts needed</strong>
+              <p>Fast-track arbitration under the Kenyan Arbitration Act keeps disputes private and resolved within a month.</p>
+            </div>
+          </li>
+          <li>
+            <div class="sol-icon"></div>
+            <div>
+              <strong>Plain English throughout</strong>
+              <p>Every clause has a plain-language translation. A founder can read and understand the entire document without a lawyer present.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="solution-visual">
+        <div class="doc-preview">
+          <div class="doc-preview-header">
+            <div class="doc-preview-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="doc-preview-title">K-SAFE Agreement</span>
+          </div>
+          <div class="doc-preview-body">
+            <div class="doc-line wide"></div>
+            <div class="doc-line medium"></div>
+            <div class="doc-spacer"></div>
+            <div class="doc-clause-preview">
+              <div class="doc-clause-title-bar"></div>
+              <div class="doc-line full"></div>
+              <div class="doc-line full"></div>
+              <div class="doc-line medium"></div>
+              <div class="doc-pill">Plain English</div>
+            </div>
+            <div class="doc-clause-preview">
+              <div class="doc-clause-title-bar"></div>
+              <div class="doc-line full"></div>
+              <div class="doc-line wide"></div>
+              <div class="doc-pill pill-warn">Anti-Siphoning</div>
+            </div>
+            <div class="doc-clause-preview">
+              <div class="doc-clause-title-bar"></div>
+              <div class="doc-line full"></div>
+              <div class="doc-line medium"></div>
+              <div class="doc-pill pill-law">Kenyan Law Note</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="section-inner">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">Three steps to a signed agreement</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">01</div>
+          <h3>Fill in your details</h3>
+          <p>Enter your company name, founders, investor, and deal terms. The generator updates your agreement in real time as you type.</p>
+        </div>
+        <div class="step-arrow"></div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <h3>Read and understand</h3>
+          <p>Click any clause to instantly translate it into plain English. See how each clause protects you under Kenyan law.</p>
+        </div>
+        <div class="step-arrow"></div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <h3>Export and execute</h3>
+          <p>Download as Markdown for version control, or print directly to a clean, signature-ready PDF document.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="documents" id="documents">
+    <div class="section-inner">
+      <div class="section-label">The Documents</div>
+      <h2 class="section-title">Two agreements. Complete protection.</h2>
+      <div class="doc-cards">
+        <div class="doc-card">
+          <div class="doc-card-badge">For Investors and Founders</div>
+          <h3>K-SAFE Agreement</h3>
+          <p class="doc-card-desc">A Kenyan-adapted Simple Agreement for Future Equity. Built around the Companies Act, 2015 with real financial guardrails against siphoning.</p>
+          <ul class="doc-card-features">
+            <li>Valuation cap and conversion mechanics (Kenyan share allotment)</li>
+            <li>Founder salary cap during pre-conversion period</li>
+            <li>M-Pesa and bank dual-signatory threshold</li>
+            <li>Related-party transaction veto</li>
+            <li>IP lockbox preventing asset transfers</li>
+            <li>Personal fraud guarantee (corporate veil waiver)</li>
+            <li>30-day Med-Arb dispute clause</li>
+          </ul>
+          <a href="generator.html?doc=safe" class="doc-card-cta">Generate K-SAFE</a>
+        </div>
+        <div class="doc-card doc-card-alt">
+          <div class="doc-card-badge">For Co-Founders</div>
+          <h3>K-FOUNDER Agreement</h3>
+          <p class="doc-card-desc">A plain-language co-founder agreement covering equity vesting, roles, IP ownership, and side-hustle restrictions with a BRS-compatible vesting mechanism.</p>
+          <ul class="doc-card-features">
+            <li>4-year vesting with 1-year cliff</li>
+            <li>Power of Attorney escrow for Form CR18</li>
+            <li>Side-hustle declaration and approval requirement</li>
+            <li>Comprehensive IP assignment (KIPI and KECOBO aligned)</li>
+            <li>East Africa non-compete (court-enforceable duration)</li>
+            <li>30-day Med-Arb dispute clause</li>
+          </ul>
+          <a href="generator.html?doc=founder" class="doc-card-cta">Generate K-FOUNDER</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="section-inner cta-band-inner">
+      <h2>Ready to protect your startup?</h2>
+      <p>Generate both agreements in minutes. No account. No subscription. No lawyer needed.</p>
+      <a href="generator.html" class="btn-primary-lg btn-invert">Open the Generator</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-brand-name">K-ELF</span>
+        <span class="footer-sub">Kenyan Equity Legal Framework</span>
+      </div>
+      <p class="footer-disclaimer">K-ELF provides a practical starting point, not a substitute for qualified legal advice. Always consult a Kenyan legal practitioner before executing binding agreements.</p>
+      <div class="footer-flag">
+        <div class="flag-bar black"></div>
+        <div class="flag-bar red"></div>
+        <div class="flag-bar green"></div>
+      </div>
+    </div>
+  </footer>
 
   <script>
-    // Replace this with your deployed contract address after Week 2
-    const CONTRACT_ADDRESS = "";
-
-    const statusEl = document.getElementById("status");
-    const connectBtn = document.getElementById("connectBtn");
-    const balanceBtn = document.getElementById("balanceBtn");
-    const walletData = document.getElementById("walletData");
-    const addressEl = document.getElementById("address");
-    const networkEl = document.getElementById("network");
-    const balanceEl = document.getElementById("balance");
-    const logEl = document.getElementById("log");
-
-    let provider = null;
-    let signer = null;
-
-    function log(message, type = "info") {
-      const p = document.createElement("p");
-      p.textContent = `> ${message}`;
-      if (type === "success") p.classList.add("success");
-      if (type === "error") p.classList.add("error");
-      logEl.prepend(p);
-    }
-
-    // Core Wallet injects window.ethereum, same as MetaMask
-    // If you want to specifically detect Core Wallet, check window.avalanche
-    function getProvider() {
-      if (window.avalanche) {
-        log("Core Wallet detected");
-        return window.avalanche;
-      }
-      if (window.ethereum) {
-        log("Injected provider detected (MetaMask or Core Wallet)");
-        return window.ethereum;
-      }
-      return null;
-    }
-
-    connectBtn.addEventListener("click", async () => {
-      const rawProvider = getProvider();
-
-      if (!rawProvider) {
-        log("No wallet detected. Install Core Wallet from core.app", "error");
-        return;
-      }
-
-      try {
-        // Request account access
-        const accounts = await rawProvider.request({ method: "eth_requestAccounts" });
-        const account = accounts[0];
-
-        // Get chain ID
-        const chainId = await rawProvider.request({ method: "eth_chainId" });
-        const chainIdDecimal = parseInt(chainId, 16);
-
-        if (chainIdDecimal !== 43113) {
-          log("Wrong network. Switch to Avalanche Fuji Testnet (Chain ID 43113)", "error");
-          return;
-        }
-
-        addressEl.textContent = account;
-        networkEl.textContent = `Fuji Testnet (${chainIdDecimal})`;
-        walletData.style.display = "block";
-
-        statusEl.textContent = "Connected to Core Wallet";
-        statusEl.classList.add("connected");
-
-        connectBtn.disabled = true;
-        balanceBtn.disabled = false;
-
-        // Store for later use
-        provider = rawProvider;
-
-        log(`Connected: ${account.slice(0, 6)}...${account.slice(-4)}`, "success");
-
-      } catch (err) {
-        log(`Connection failed: ${err.message}`, "error");
-      }
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    const saved = localStorage.getItem('kelf-theme') || 'light';
+    root.setAttribute('data-theme', saved);
+    toggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('kelf-theme', next);
     });
-
-    balanceBtn.addEventListener("click", async () => {
-      try {
-        const accounts = await provider.request({ method: "eth_accounts" });
-        const account = accounts[0];
-
-        const balanceHex = await provider.request({
-          method: "eth_getBalance",
-          params: [account, "latest"],
-        });
-
-        // Convert from wei (hex) to AVAX
-        const balanceWei = BigInt(balanceHex);
-        const balanceAVAX = Number(balanceWei) / 1e18;
-
-        balanceEl.textContent = `${balanceAVAX.toFixed(4)} AVAX`;
-        log(`Balance fetched: ${balanceAVAX.toFixed(4)} AVAX`, "success");
-
-      } catch (err) {
-        log(`Failed to get balance: ${err.message}`, "error");
-      }
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+      });
     });
   </script>
 </body>
 </html>
+<!-- Kenyan Equity Legal Framework - Landing Page -->

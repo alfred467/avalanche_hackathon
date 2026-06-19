@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Generate your customized Kenyan legal agreement with plain-English annotations.">
+  <title>Generator — K-ELF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="generator.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <nav class="gen-nav">
+    <div class="gen-nav-inner">
+      <a href="index.html" class="gen-nav-back">
+        <i data-lucide="arrow-left"></i>
+        <span class="gen-brand">K-ELF</span>
+      </a>
+
+      <div class="doc-tabs">
+        <button class="doc-tab active" data-tab="safe" id="tab-safe">
+          <i data-lucide="shield-check"></i>
+          K-SAFE
+        </button>
+        <button class="doc-tab" data-tab="founder" id="tab-founder">
+          <i data-lucide="users"></i>
+          K-FOUNDER
+        </button>
+      </div>
+
+      <div class="gen-nav-actions">
+        <button id="settings-toggle" class="gen-icon-btn" title="Edit Details" aria-label="Toggle settings">
+          <i data-lucide="settings-2"></i>
+        </button>
+        <button id="theme-toggle" class="gen-icon-btn theme-toggle" aria-label="Toggle theme">
+          <span class="sun-label">Light</span>
+          <span class="moon-label">Dark</span>
+        </button>
+        <button id="download-md-btn" class="gen-btn secondary">
+          <i data-lucide="download"></i>
+          Export .md
+        </button>
+        <button id="print-btn" class="gen-btn primary">
+          <i data-lucide="printer"></i>
+          Print PDF
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="gen-layout">
+
+    <aside class="settings-panel" id="settings-panel">
+      <div class="settings-scroll">
+        <h2 class="settings-title">Agreement Details</h2>
+        <p class="settings-hint">Changes update the document in real time.</p>
+
+        <form id="customizer-form" onsubmit="return false;">
+
+          <div class="field-group">
+            <div class="field-group-label">Company</div>
+            <div class="field">
+              <label for="company-name">Company Name</label>
+              <input type="text" id="company-name" value="Safi Tech Limited">
+            </div>
+            <div class="field">
+              <label for="reg-number">BRS Registration No.</label>
+              <input type="text" id="reg-number" value="PVT-DLUX89Z">
+            </div>
+            <div class="field">
+              <label for="founder-names">Co-Founders (comma-separated)</label>
+              <input type="text" id="founder-names" value="Jane Koech, Peter Omondi">
+            </div>
+            <div class="field">
+              <label for="investment-date">Agreement Date</label>
+              <input type="date" id="investment-date">
+            </div>
+          </div>
+
+          <div class="field-group k-safe-fields">
+            <div class="field-group-label">K-SAFE Deal Terms</div>
+            <div class="field">
+              <label for="investor-name">Investor Name</label>
+              <input type="text" id="investor-name" value="Nairobi Capital Partners">
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="investment-amount">Investment (KES)</label>
+                <input type="text" id="investment-amount" value="5,000,000">
+              </div>
+              <div class="field">
+                <label for="valuation-cap">Valuation Cap (KES)</label>
+                <input type="text" id="valuation-cap" value="100,000,000">
+              </div>
+            </div>
+            <div class="field">
+              <label for="qualified-round">Qualified Funding Round (KES)</label>
+              <input type="text" id="qualified-round" value="25,000,000">
+            </div>
+          </div>
+
+          <div class="field-group k-safe-fields">
+            <div class="field-group-label">Anti-Siphoning Controls</div>
+            <div class="field-row">
+              <div class="field">
+                <label for="salary-cap">Monthly Salary Cap (KES)</label>
+                <input type="text" id="salary-cap" value="200,000">
+              </div>
+              <div class="field">
+                <label for="sig-threshold">Dual-Sig Threshold (KES)</label>
+                <input type="text" id="sig-threshold" value="150,000">
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group k-founder-fields hidden">
+            <div class="field-group-label">K-FOUNDER Terms</div>
+            <div class="field-row">
+              <div class="field">
+                <label for="weekly-hours">Weekly Commitment (hrs)</label>
+                <input type="number" id="weekly-hours" value="45" min="1" max="168">
+              </div>
+              <div class="field">
+                <label for="vesting-years">Vesting Period (yrs)</label>
+                <input type="number" id="vesting-years" value="4" min="1" max="10">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="cliff-months">Cliff (months)</label>
+                <input type="number" id="cliff-months" value="12" min="0" max="48">
+              </div>
+              <div class="field">
+                <label for="noncompete-months">Non-Compete (months)</label>
+                <input type="number" id="noncompete-months" value="12" min="0" max="36">
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </aside>
+
+    <main class="doc-stage" id="doc-stage">
+      <div class="doc-paper" id="doc-paper">
+
+        <div class="doc-paper-top">
+          <div class="doc-flag-row">
+            <div class="doc-flag-bar black"></div>
+            <div class="doc-flag-bar red"></div>
+            <div class="doc-flag-bar green"></div>
+          </div>
+          <p class="doc-paper-kicker">Generated by K-ELF — Kenyan Companies Act, 2015</p>
+          <div class="doc-paper-label" id="doc-paper-label">K-SAFE Agreement</div>
+          <p class="doc-paper-hint">Select any clause to open its plain-English annotation</p>
+        </div>
+
+        <div id="contract-view" class="contract-view"></div>
+
+        <div class="doc-paper-bottom">
+          <p class="doc-disclaimer">This document was generated by K-ELF (Kenyan Equity Legal Framework). It is a practical starting point and does not replace advice from a qualified Kenyan legal practitioner.</p>
+          <div class="sig-lines">
+            <div class="sig-block">
+              <div class="sig-line"></div>
+              <span>Authorised Signatory — Company</span>
+            </div>
+            <div class="sig-block">
+              <div class="sig-line"></div>
+              <span>Authorised Signatory — Investor / Counter-party</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <aside class="annotation-panel" id="annotation-panel">
+
+      <div id="annotation-idle" class="annotation-idle">
+        <div class="annotation-idle-icon">
+          <i data-lucide="book-marked"></i>
+        </div>
+        <h3>Clause Translator</h3>
+        <p>Select any clause in the document to see its plain-English meaning and Kenyan law context here.</p>
+        <div class="annotation-tip">
+          <i data-lucide="mouse-pointer-click"></i>
+          <span>Click to pin a clause. Click again to release.</span>
+        </div>
+      </div>
+
+      <div id="annotation-active" class="annotation-active hidden">
+        <button class="annotation-close" id="annotation-close" aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+
+        <div class="annotation-tag" id="annotation-tag">Clause</div>
+        <h3 class="annotation-clause-title" id="annotation-clause-title"></h3>
+
+        <div class="annotation-section">
+          <div class="annotation-section-label">
+            <i data-lucide="message-square"></i>
+            Plain English
+          </div>
+          <div class="annotation-body" id="annotation-plain"></div>
+        </div>
+
+        <div class="annotation-section law-section">
+          <div class="annotation-section-label law">
+            <i data-lucide="landmark"></i>
+            Kenyan Law Context
+          </div>
+          <div class="annotation-body law-body" id="annotation-law"></div>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <script src="../templates/safe.js"></script>
+  <script src="../templates/founder.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+<!-- Kenyan Equity Legal Framework - Generator Page -->

@@ -1,27 +1,27 @@
 {
-  "name": "minihack-cohort1",
+  "name": "k-legal",
   "version": "1.0.0",
-  "description": "Mini Hack Cohort 1 — Payments on Avalanche starter template",
+  "description": "Kenyan Equity Legal Framework - CLI Generator and Interactive Translator",
+  "main": "bin/cli.js",
+  "bin": {
+    "k-legal": "./bin/cli.js"
+  },
   "scripts": {
-    "compile": "hardhat compile",
-    "test": "hardhat test",
-    "deploy:fuji": "hardhat run scripts/deploy.js --network fuji",
-    "verify": "hardhat verify --network fuji",
-    "node": "hardhat node",
-    "clean": "hardhat clean"
+    "start": "node bin/cli.js",
+    "dev": "npx local-cors-proxy"
   },
-  "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
-    "hardhat": "^2.22.0"
-  },
+  "keywords": [
+    "kenya",
+    "equity",
+    "investing",
+    "safe",
+    "legal",
+    "founder-agreement"
+  ],
+  "author": "Alfred",
+  "license": "MIT",
   "dependencies": {
-    "@openzeppelin/contracts": "^5.0.0",
-    "dotenv": "^16.4.0",
-    "ethers": "^6.11.0",
-    "express": "^4.18.0",
-    "axios": "^1.6.0"
+    "prompts": "^2.4.2"
   },
-  "engines": {
-    "node": ">=20.0.0"
-  }
+  "_comment": "Kenyan Equity Legal Framework"
 }
