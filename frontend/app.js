@@ -36,9 +36,34 @@ const fullscreenBtn = document.getElementById('et-fullscreen');
 const toast = document.getElementById('toast');
 const wordCount = document.getElementById('et-wordcount');
 const readingTime = document.getElementById('et-reading-time');
-const docStatusBadge = document.getElementById('doc-status-badge');
-const etLockToggle = document.getElementById('et-lock-toggle');
-const etModeLbl = document.getElementById('et-mode-label');
+// User Profile dropdown
+const userBtn = document.getElementById('user-profile-btn');
+const userDropdown = document.getElementById('user-dropdown');
+if (userBtn && userDropdown) {
+  userBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    userDropdown.classList.toggle('show');
+  });
+  document.addEventListener('click', () => {
+    userDropdown.classList.remove('show');
+  });
+
+  async function loadProfile() {
+    try {
+      const res = await fetch('/api/auth/me');
+      if (res.ok) {
+        const data = await res.json();
+        const nDisp = document.getElementById('user-name-display');
+        const dn = document.getElementById('dropdown-name');
+        const de = document.getElementById('dropdown-email');
+        if (nDisp) nDisp.innerText = data.user.name.split(' ')[0];
+        if (dn) dn.innerText = data.user.name;
+        if (de) de.innerText = data.user.email;
+      }
+    } catch(e) {}
+  }
+  loadProfile();
+}
 const stampDutyResult = document.getElementById('stamp-duty-result');
 const capTableResult = document.getElementById('cap-table-result');
 

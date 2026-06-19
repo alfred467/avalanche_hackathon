@@ -11,6 +11,21 @@
   <link rel="stylesheet" href="generator.css">
   <link rel="stylesheet" href="wizard.css">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* User Profile Dropdown */
+    .user-profile { position: relative; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.4rem 0.8rem; border-radius: 6px; border: 1px solid var(--c-border); background: var(--c-surface); font-weight: 600; font-size: 0.85rem; color: var(--c-text); margin-left: 1rem; }
+    .user-profile:hover { border-color: var(--c-green); }
+    .user-profile i { width: 16px; height: 16px; color: var(--c-green); }
+    .user-dropdown { position: absolute; top: 115%; right: 0; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: none; flex-direction: column; min-width: 200px; z-index: 100; overflow: hidden; text-align: left; }
+    .user-dropdown.show { display: flex; }
+    .user-dropdown-header { padding: 1rem; border-bottom: 1px solid var(--c-border); background: var(--c-bg); }
+    .user-dropdown-header p { margin: 0; font-size: 0.85rem; color: var(--c-text-2); font-weight: normal; }
+    .user-dropdown-header h4 { margin: 0; font-size: 1rem; color: var(--c-text); }
+    .user-dropdown a { padding: 0.8rem 1rem; color: var(--c-text); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: background 0.2s; font-size: 0.9rem; font-weight: 500; }
+    .user-dropdown a:hover { background: var(--c-bg); color: var(--c-green); }
+    .user-dropdown a.logout { color: #ef4444; border-top: 1px solid var(--c-border); }
+    .user-dropdown a.logout:hover { background: #fef2f2; }
+  </style>
 </head>
 <body>
 
@@ -164,6 +179,19 @@
         <button id="print-btn" class="gen-btn secondary">
           <i data-lucide="printer"></i> Print
         </button>
+        
+        <!-- User Profile -->
+        <div class="user-profile" id="user-profile-btn">
+          <i data-lucide="user"></i> <span id="user-name-display">Loading...</span>
+          <div class="user-dropdown" id="user-dropdown">
+            <div class="user-dropdown-header">
+              <h4 id="dropdown-name">User</h4>
+              <p id="dropdown-email">user@example.com</p>
+            </div>
+            <a href="/dashboard"><i data-lucide="folder"></i> My Documents</a>
+            <a href="/api/auth/logout" class="logout"><i data-lucide="log-out"></i> Log Out</a>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
