@@ -204,7 +204,7 @@ input:hover { border-color: var(--c-text-3); }
 /* DOCUMENT STAGE */
 .doc-stage {
   overflow-y: auto; overflow-x: hidden;
-  background: var(--c-bg);
+  background: var(--c-panel);
   padding: 3rem 2rem;
   transition: background .25s;
 }
@@ -212,13 +212,16 @@ input:hover { border-color: var(--c-text-3); }
 .doc-stage::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: 10px; }
 
 .doc-paper {
-  max-width: 700px; margin: 0 auto;
+  width: 210mm;
+  min-height: 297mm;
+  max-width: 100%;
+  margin: 0 auto;
   background: var(--c-surface);
   border: 1px solid var(--c-border);
-  border-radius: 4px;
-  box-shadow: var(--shadow-m);
+  border-radius: 2px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
   transition: background .25s, border-color .25s;
-  padding: 4rem 4.5rem;
+  padding: 2.5cm 2.5cm;
 }
 
 /* Paper top header */
@@ -240,8 +243,9 @@ input:hover { border-color: var(--c-text-3); }
   text-transform: uppercase; margin-bottom: .75rem;
 }
 .doc-paper-label {
-  font-family: var(--font-h); font-size: 1.6rem; font-weight: 800;
-  letter-spacing: -.5px; color: var(--c-text); margin-bottom: .5rem;
+  font-family: 'Times New Roman', Times, serif; font-size: 1.8rem; font-weight: 700;
+  letter-spacing: 1px; color: var(--c-text); margin-bottom: .5rem;
+  text-transform: uppercase; text-align: center;
 }
 .doc-paper-hint {
   font-size: .78rem; color: var(--c-green); font-weight: 500; font-style: italic;
@@ -251,21 +255,17 @@ input:hover { border-color: var(--c-text-3); }
 .contract-view { display: flex; flex-direction: column; gap: 0; }
 
 .contract-intro {
-  font-family: var(--font-doc); font-style: italic;
-  font-size: .94rem; line-height: 1.75;
+  font-family: 'Times New Roman', Times, serif; font-style: italic;
+  font-size: 11pt; line-height: 1.5; text-align: justify;
   color: var(--c-text-2);
-  padding: 1.25rem 1.5rem;
-  border-left: 3px solid var(--c-border);
+  padding: 0 1.5rem;
   margin-bottom: 2rem;
-  border-radius: 0 4px 4px 0;
 }
 
 .contract-clause {
-  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+  padding: 1rem 1.5rem;
   margin-bottom: .5rem;
-  border-radius: 6px;
   border: 1px solid transparent;
-  border-left: 3px solid transparent;
   cursor: pointer;
   transition: all .18s var(--ease);
   position: relative;
@@ -273,21 +273,19 @@ input:hover { border-color: var(--c-text-3); }
 .contract-clause:hover {
   background: var(--c-green-l);
   border-color: var(--c-border);
-  border-left-color: var(--c-green);
 }
 .contract-clause.selected {
   background: var(--c-green-l);
-  border-color: var(--c-border);
-  border-left-color: var(--c-green);
+  border-color: var(--c-green);
   box-shadow: var(--shadow-s);
 }
 .clause-title {
-  font-family: var(--font-h); font-size: .92rem; font-weight: 700;
-  color: var(--c-green); margin-bottom: .6rem;
+  font-family: 'Times New Roman', Times, serif; font-size: 12pt; font-weight: bold;
+  color: var(--c-text); margin-bottom: .6rem; text-decoration: underline;
 }
 .clause-body {
-  font-family: var(--font-doc); font-size: .92rem; line-height: 1.78;
-  color: var(--c-text);
+  font-family: 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.5;
+  color: var(--c-text); text-align: justify;
 }
 .var-span {
   font-weight: 600; color: var(--c-blue);
@@ -396,6 +394,16 @@ input:hover { border-color: var(--c-text-3); }
 }
 .law-body { border-left: 3px solid var(--c-blue); }
 
+.annotation-section-label.ai { color: #8b5cf6; }
+.ai-chat-box { display: flex; flex-direction: column; gap: .5rem; margin-top: .5rem; }
+.ai-chat-box textarea {
+  width: 100%; border: 1px solid var(--c-border); border-radius: 6px;
+  padding: .5rem; font-family: var(--font-b); font-size: .82rem; resize: none;
+  background: var(--c-surface); color: var(--c-text);
+}
+.ai-body { border-left: 3px solid #8b5cf6; margin-top: .5rem; white-space: pre-wrap;}
+.gen-btn.sm { padding: .25rem .75rem; font-size: .75rem; align-self: flex-end; }
+
 /* PRINT STYLES */
 @media print {
   body { background: #fff !important; color: #000 !important; overflow: visible; }
@@ -424,3 +432,5 @@ input:hover { border-color: var(--c-text-3); }
   .doc-flag-bar.green { background: #006600 !important; print-color-adjust: exact; }
 }
 /* Kenyan Equity Legal Framework - Generator Page Stylesheet */
+@ m e d i a   ( m a x - w i d t h :   9 0 0 p x )   {   . g e n - l a y o u t   {   f l e x - d i r e c t i o n :   c o l u m n ;   h e i g h t :   a u t o ;   }   . s e t t i n g s - p a n e l   {   w i d t h :   1 0 0 % ;   b o r d e r - r i g h t :   n o n e ;   b o r d e r - b o t t o m :   1 p x   s o l i d   v a r ( - - c - b o r d e r ) ;   m a x - h e i g h t :   4 0 v h ;   }   . d o c - s t a g e   {   f l e x :   1 ;   p a d d i n g :   1 r e m ;   }   . a n n o t a t i o n - p a n e l   {   p o s i t i o n :   s t a t i c ;   w i d t h :   1 0 0 % ;   b o r d e r - l e f t :   n o n e ;   b o r d e r - t o p :   1 p x   s o l i d   v a r ( - - c - b o r d e r ) ;   }   }  
+ 

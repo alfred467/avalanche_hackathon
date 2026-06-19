@@ -9,13 +9,106 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="generator.css">
+  <link rel="stylesheet" href="wizard.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
+  <!-- ══════════════════════════════════════════════════════════════════════
+       AI WIZARD MODAL — Opens on first visit / via "Ask AI to Generate"
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div id="wizard-overlay" class="wizard-overlay">
+    <div class="wizard-modal" role="dialog" aria-modal="true" aria-labelledby="wizard-title">
+
+      <div class="wizard-header">
+        <div class="wizard-brand">
+          <i data-lucide="bot"></i>
+          <span>K-ELF AI Document Wizard</span>
+        </div>
+        <button id="wizard-close-btn" class="wizard-close" aria-label="Close wizard and edit manually">
+          <i data-lucide="x"></i>
+          Edit Manually
+        </button>
+      </div>
+
+      <div class="wizard-body">
+        <div id="wizard-step-intro" class="wizard-step active">
+          <h2 id="wizard-title">Tell me about your deal</h2>
+          <p class="wizard-desc">Describe your startup, founders, investors and deal terms in plain English. The AI will extract all the details and generate your legal document automatically.</p>
+          <div class="wizard-examples">
+            <p class="wizard-examples-label">Try something like:</p>
+            <button class="wizard-example-chip" data-example="My company is Safi Tech Limited, registered in Kenya. Founders are Jane Koech and Peter Omondi. We're raising 5 million KES from Nairobi Capital Partners at a 100 million KES valuation cap. Salary cap 200k, M-Pesa threshold 150k.">K-SAFE investor deal</button>
+            <button class="wizard-example-chip" data-example="We are two co-founders starting NairobiAI Ltd. Jane will be CEO and Peter the CTO. We want a 4-year vesting schedule with a 1-year cliff. Standard 12-month non-compete for East Africa.">Founder agreement</button>
+          </div>
+
+          <div class="wizard-doc-select">
+            <p class="wizard-examples-label">Document type:</p>
+            <div class="wizard-doc-tabs">
+              <button class="wizard-doc-tab active" data-wdoc="safe" id="wdoc-safe">
+                <i data-lucide="shield-check"></i> K-SAFE (Investor Deal)
+              </button>
+              <button class="wizard-doc-tab" data-wdoc="founder" id="wdoc-founder">
+                <i data-lucide="users"></i> K-FOUNDER (Co-Founders)
+              </button>
+            </div>
+          </div>
+
+          <div class="wizard-input-wrap">
+            <textarea id="wizard-input" rows="5" placeholder="E.g. My company is called GreenHarvest Kenya Ltd, registered as PVT-GREEN123. Myself (Alice Mwangi) and my co-founder Bob Odhiambo are raising KES 8 million from EastAfrica Ventures at a KES 150 million cap..."></textarea>
+            <button id="wizard-generate-btn" class="wizard-generate-btn">
+              <i data-lucide="sparkles"></i>
+              Generate My Document
+            </button>
+          </div>
+        </div>
+
+        <div id="wizard-step-loading" class="wizard-step hidden">
+          <div class="wizard-loading-anim">
+            <div class="wizard-spinner"></div>
+          </div>
+          <h2>Reading your description...</h2>
+          <p class="wizard-desc" id="wizard-loading-msg">Extracting company details, deal terms and legal fields from your input...</p>
+          <div class="wizard-loading-steps">
+            <div class="wls" id="wls-1"><i data-lucide="check-circle"></i> Parsing your startup details</div>
+            <div class="wls" id="wls-2"><i data-lucide="loader"></i> Extracting deal terms & amounts</div>
+            <div class="wls pending" id="wls-3"><i data-lucide="circle"></i> Generating legal clauses</div>
+          </div>
+        </div>
+
+        <div id="wizard-step-result" class="wizard-step hidden">
+          <div class="wizard-success-icon"><i data-lucide="check-circle-2"></i></div>
+          <h2>Document ready!</h2>
+          <p class="wizard-desc">The AI extracted the following details from your description. Review them below, then click "Apply to Document".</p>
+          <div id="wizard-extracted-fields" class="wizard-fields-preview"></div>
+          <div class="wizard-result-actions">
+            <button id="wizard-apply-btn" class="wizard-generate-btn">
+              <i data-lucide="file-check"></i>
+              Apply to Document
+            </button>
+            <button id="wizard-retry-btn" class="wizard-back-btn">
+              <i data-lucide="rotate-ccw"></i>
+              Try Again
+            </button>
+          </div>
+        </div>
+
+        <div id="wizard-step-error" class="wizard-step hidden">
+          <div class="wizard-error-icon"><i data-lucide="alert-triangle"></i></div>
+          <h2>Something went wrong</h2>
+          <p class="wizard-desc" id="wizard-error-msg">Could not connect to the AI assistant. Please check your GROQ_API_KEY or try again.</p>
+          <button id="wizard-err-retry-btn" class="wizard-back-btn">
+            <i data-lucide="rotate-ccw"></i> Try Again
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ MAIN GENERATOR UI ══ -->
   <nav class="gen-nav">
     <div class="gen-nav-inner">
-      <a href="index.html" class="gen-nav-back">
+      <a href="/" class="gen-nav-back">
         <i data-lucide="arrow-left"></i>
         <span class="gen-brand">K-ELF</span>
       </a>
@@ -32,6 +125,10 @@
       </div>
 
       <div class="gen-nav-actions">
+        <button id="wizard-open-btn" class="gen-btn primary sm" title="Generate with AI">
+          <i data-lucide="sparkles"></i>
+          AI Generate
+        </button>
         <button id="settings-toggle" class="gen-icon-btn" title="Edit Details" aria-label="Toggle settings">
           <i data-lucide="settings-2"></i>
         </button>
@@ -39,32 +136,93 @@
           <span class="sun-label">Light</span>
           <span class="moon-label">Dark</span>
         </button>
-        <button id="download-md-btn" class="gen-btn secondary">
-          <i data-lucide="download"></i>
-          Export .md
+        <button id="undo-btn" class="gen-icon-btn" title="Undo" aria-label="Undo">
+          <i data-lucide="undo-2"></i>
         </button>
-        <button id="print-btn" class="gen-btn primary">
-          <i data-lucide="printer"></i>
-          Print PDF
+        <button id="redo-btn" class="gen-icon-btn" title="Redo" aria-label="Redo">
+          <i data-lucide="redo-2"></i>
+        </button>
+        <button id="reset-btn" class="gen-icon-btn" title="Reset Form Data" aria-label="Reset form">
+          <i data-lucide="rotate-ccw"></i>
+        </button>
+        <button id="copy-btn" class="gen-btn secondary">
+          <i data-lucide="copy"></i>
+          Copy Text
+        </button>
+        <button id="email-btn" class="gen-btn secondary" title="Email Document">
+          <i data-lucide="mail"></i> Email
+        </button>
+        <button id="download-docx-btn" class="gen-btn secondary" title="Export .docx">
+          <i data-lucide="file-text"></i> .docx
+        </button>
+        <button id="download-md-btn" class="gen-btn secondary">
+          <i data-lucide="download"></i> .md
+        </button>
+        <button id="save-dashboard-btn" class="gen-btn primary">
+          <i data-lucide="upload-cloud"></i> Save to Dashboard
+        </button>
+        <button id="print-btn" class="gen-btn secondary">
+          <i data-lucide="printer"></i> Print
         </button>
       </div>
     </div>
   </nav>
 
+  <!-- Word-processor editing toolbar -->
+  <div class="edit-toolbar" id="edit-toolbar">
+    <button class="et-btn" id="et-bold" title="Bold" aria-label="Bold"><i data-lucide="bold"></i></button>
+    <button class="et-btn" id="et-italic" title="Italic" aria-label="Italic"><i data-lucide="italic"></i></button>
+    <button class="et-btn" id="et-underline" title="Underline" aria-label="Underline"><i data-lucide="underline"></i></button>
+    <div class="et-sep"></div>
+    <button class="et-btn" id="et-align-left" title="Align Left"><i data-lucide="align-left"></i></button>
+    <button class="et-btn" id="et-align-center" title="Align Center"><i data-lucide="align-center"></i></button>
+    <button class="et-btn" id="et-align-right" title="Align Right"><i data-lucide="align-right"></i></button>
+    <div class="et-sep"></div>
+    <select id="et-fontsize" class="et-select" title="Font size">
+      <option value="12">12pt</option>
+      <option value="14" selected>14pt</option>
+      <option value="16">16pt</option>
+      <option value="18">18pt</option>
+    </select>
+    <button class="et-btn" id="et-fullscreen" title="Fullscreen"><i data-lucide="maximize"></i></button>
+    <div class="et-sep"></div>
+    <span class="et-label">Editing mode: <strong id="et-mode-label">Live</strong></span>
+    <button class="et-btn et-lock" id="et-lock-toggle" title="Lock / Unlock editing">
+      <i data-lucide="lock-open"></i>
+    </button>
+    <div class="et-sep"></div>
+    <span class="et-label" id="et-wordcount">0 words</span>
+    <span class="et-label" id="et-reading-time" style="color:var(--c-green);font-weight:600;">0 min read</span>
+  </div>
+
   <div class="gen-layout">
 
     <aside class="settings-panel" id="settings-panel">
       <div class="settings-scroll">
-        <h2 class="settings-title">Agreement Details</h2>
+        <div class="settings-panel-header">
+          <h2 class="settings-title">Agreement Details</h2>
+          <button id="ai-prefill-btn" class="gen-btn primary sm" style="width:100%; margin-top: 0.75rem;">
+            <i data-lucide="sparkles"></i> Fill with AI
+          </button>
+        </div>
         <p class="settings-hint">Changes update the document in real time.</p>
 
         <form id="customizer-form" onsubmit="return false;">
-
+          <div class="field-group">
+            <div class="field-group-label">Document Settings</div>
+            <div class="field-row">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;"><input type="checkbox" id="autosave-toggle" checked> Auto-save</label>
+            </div>
+            <div class="field-row" style="margin-top:0.5rem">
+              <button id="save-version-btn" class="gen-btn secondary sm" style="flex:1">Save Version</button>
+              <select id="load-version-select" class="et-select" style="flex:1"><option value="">Load...</option></select>
+            </div>
+          </div>
           <div class="field-group">
             <div class="field-group-label">Company</div>
             <div class="field">
               <label for="company-name">Company Name</label>
-              <input type="text" id="company-name" value="Safi Tech Limited">
+              <input type="text" id="company-name" value="Safi Tech Limited" autocomplete="organization">
             </div>
             <div class="field">
               <label for="reg-number">BRS Registration No.</label>
@@ -140,6 +298,24 @@
             </div>
           </div>
 
+          <!-- Stamp duty calculator -->
+          <div class="field-group k-safe-fields">
+            <div class="field-group-label">Stamp Duty Calculator</div>
+            <div class="field">
+              <label>Estimated Stamp Duty (1% of nominal value)</label>
+              <div class="calc-result" id="stamp-duty-result">KES 0</div>
+            </div>
+          </div>
+
+          <!-- Cap Table Preview -->
+          <div class="field-group k-safe-fields">
+            <div class="field-group-label">Post-Money Stake Preview</div>
+            <div class="field">
+              <label>Investor's estimated stake</label>
+              <div class="calc-result" id="cap-table-result">—%</div>
+            </div>
+          </div>
+
         </form>
       </div>
     </aside>
@@ -153,9 +329,12 @@
             <div class="doc-flag-bar red"></div>
             <div class="doc-flag-bar green"></div>
           </div>
-          <p class="doc-paper-kicker">Generated by K-ELF — Kenyan Companies Act, 2015</p>
+          <p class="doc-paper-kicker">Generated by K-ELF — Kenyan Companies Act, 2015 | Constitution of Kenya | UNCITRAL</p>
           <div class="doc-paper-label" id="doc-paper-label">K-SAFE Agreement</div>
-          <p class="doc-paper-hint">Select any clause to open its plain-English annotation</p>
+          <div class="doc-doc-status">
+            <span id="doc-status-badge" class="doc-status-badge draft">DRAFT</span>
+            <span id="doc-edit-status" class="doc-edit-hint">Click any clause to edit &bull; Hover to preview</span>
+          </div>
         </div>
 
         <div id="contract-view" class="contract-view"></div>
@@ -214,14 +393,55 @@
           </div>
           <div class="annotation-body law-body" id="annotation-law"></div>
         </div>
+
+        <!-- Clause edit actions -->
+        <div class="annotation-section clause-actions-section">
+          <div class="annotation-section-label">
+            <i data-lucide="pencil"></i>
+            Clause Actions
+          </div>
+          <div class="clause-action-btns">
+            <button class="clause-action-btn" id="ca-move-up"><i data-lucide="arrow-up"></i> Move Up</button>
+            <button class="clause-action-btn" id="ca-move-down"><i data-lucide="arrow-down"></i> Move Down</button>
+            <button class="clause-action-btn" id="ca-add-custom"><i data-lucide="plus"></i> Add Clause Below</button>
+            <button class="clause-action-btn" id="ca-delete" style="color:red;border-color:red"><i data-lucide="trash"></i> Delete</button>
+            <button class="clause-action-btn" id="ca-simplify">
+              <i data-lucide="minimize-2"></i> Simplify
+            </button>
+            <button class="clause-action-btn" id="ca-strengthen">
+              <i data-lucide="shield-check"></i> Strengthen
+            </button>
+            <button class="clause-action-btn" id="ca-translate-sw">
+              <i data-lucide="languages"></i> Translate (Swahili)
+            </button>
+            <button class="clause-action-btn" id="ca-risk">
+              <i data-lucide="alert-triangle"></i> Risk Assessment
+            </button>
+          </div>
+        </div>
+
+        <div class="annotation-section ai-section">
+          <div class="annotation-section-label ai">
+            <i data-lucide="bot"></i>
+            Ask Groq AI Assistant
+          </div>
+          <div class="ai-chat-box">
+            <textarea id="ai-input" placeholder="Ask a legal question about this clause..." rows="2"></textarea>
+            <button id="ai-submit-btn" class="gen-btn primary sm">Ask AI</button>
+          </div>
+          <div id="ai-response" class="annotation-body ai-body hidden"></div>
+        </div>
       </div>
 
     </aside>
 
   </div>
 
-  <script src="../templates/safe.js"></script>
-  <script src="../templates/founder.js"></script>
+  <!-- Toast notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="templates/safe.js"></script>
+  <script src="templates/founder.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

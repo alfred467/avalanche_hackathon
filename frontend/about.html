@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us — K-ELF</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <span class="nav-name">K-ELF</span>
+      </a>
+      <div class="nav-links">
+        <a href="/#problem">The Problem</a>
+        <a href="/#how">How It Works</a>
+        <a href="/about">About</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+          <span class="sun">Light</span><span class="moon">Dark</span>
+        </button>
+        <a href="/generator" class="cta-btn-nav">Open Generator</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="problem" style="padding-top: 10rem;">
+    <div class="section-inner">
+      <div class="section-label">Our Mission</div>
+      <h2 class="section-title">Bridging Kenyan Innovation with Global Capital</h2>
+      <p style="color: var(--c-text-2); font-size: 1.1rem; line-height: 1.6; max-width: 800px; margin-bottom: 2rem;">
+        K-ELF (Kenyan Equity Legal Framework) was built out of a critical necessity. We realized that hundreds of brilliant Kenyan startups were failing not because of bad products, but because of incompatible legal structures. Founders were using copy-pasted American SAFE notes that have no legal standing under the Kenyan Companies Act, 2015. 
+      </p>
+      <p style="color: var(--c-text-2); font-size: 1.1rem; line-height: 1.6; max-width: 800px; margin-bottom: 2rem;">
+        We built K-ELF to create a <strong>Cross-Border Legal Bridge</strong>. Our platform ensures that every clause is fully anchored in the Constitution of Kenya and the Kenyan Companies Act, while explicitly mirroring US Delaware C-Corp mechanics and International Chamber of Commerce (ICC) standards. This dual compatibility means a startup in Nairobi can confidently sign a K-SAFE with an investor in San Francisco, and both parties know their rights are protected globally and locally.
+      </p>
+      <div class="hero-actions">
+        <a href="/generator" class="btn-primary-lg">Generate Your Agreement</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-brand-name">K-ELF</span>
+        <span class="footer-sub">Kenyan Equity Legal Framework</span>
+      </div>
+      <p class="footer-disclaimer">K-ELF provides a practical starting point, not a substitute for qualified legal advice.</p>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    const saved = localStorage.getItem('kelf-theme') || 'light';
+    root.setAttribute('data-theme', saved);
+    toggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('kelf-theme', next);
+    });
+    lucide.createIcons();
+  </script>
+</body>
+</html>

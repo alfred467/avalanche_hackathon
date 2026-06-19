@@ -4,10 +4,10 @@ const founderTemplate = {
   clauses: [
     {
       id: "founder-preamble",
-      title: "Preamble & Co-Founders",
-      text: "This Agreement is entered into by and between the Co-Founders (the 'Founders'): {{FOUNDER_NAMES_WITH_DETAILS}} of {{COMPANY_NAME}} (Registration No. {{REGISTRATION_NUMBER}}), hereinafter referred to as the 'Company'.",
-      translation: "This lists the names and ID/Passport details of all the co-founders starting the business together.",
-      kenyanLawNote: "Provides the legal identity of each party. It is recommended to include national ID numbers or Passport numbers as standard practice in Kenyan contracts."
+      title: "Preamble & Co-Founders (Cross-Border Bridge)",
+      text: "This Agreement is entered into by and between the Co-Founders (the 'Founders'): {{FOUNDER_NAMES_WITH_DETAILS}} of {{COMPANY_NAME}} (Registration No. {{REGISTRATION_NUMBER}}), hereinafter referred to as the 'Company'. This Agreement is anchored in the Constitution of Kenya (Article 32 - Freedom of Association and Article 40 - Protection of Property) and the Kenyan Companies Act, 2015, while explicitly mirroring Delaware C-Corp Founder Restricted Stock Purchase Agreements to ensure seamless compatibility with international US venture capital standards.",
+      translation: "This lists the names and ID/Passport details of all the co-founders starting the business together. We state explicitly that this document is legally equivalent to US Delaware Founder Agreements, making it easy for foreign investors to read and trust.",
+      kenyanLawNote: "Provides the legal identity of each party under the Kenyan Companies Act, 2015 and protects property rights under Article 40 of the Constitution. Bridges local structure with US Delaware Restricted Stock standards."
     },
     {
       id: "founder-commitment",
@@ -39,10 +39,10 @@ const founderTemplate = {
     },
     {
       id: "founder-dispute",
-      title: "5. Alternative Dispute Resolution (Med-Arb)",
-      text: "Any dispute among Founders regarding this Agreement, shares, or roles shall be resolved through mediation. If mediation fails within 10 days, the matter shall be referred to final and binding arbitration in Nairobi before a single arbitrator agreed upon by the parties, to be resolved within 20 days. The parties waive their right to appeal to the high court, except as permitted under the Arbitration Act.",
-      translation: "If founders have a dispute, they must resolve it via mediation or a fast-track 20-day arbitration in Nairobi. Founders agree not to take each other to court, saving time and money.",
-      kenyanLawNote: "Designed under the Kenyan Arbitration Act to keep shareholder disputes private and swift, preventing public court filings that could kill the startup."
+      title: "5. Alternative Dispute Resolution (Med-Arb - International Aligned)",
+      text: "Any dispute among Founders regarding this Agreement, shares, or roles shall be resolved through mediation. If mediation fails within 10 days, the matter shall be referred to final and binding arbitration in Nairobi under the United Nations Commission on International Trade Law (UNCITRAL) Arbitration Rules and the Kenyan Arbitration Act, Cap 49. The parties waive their right to appeal to the high court. The award shall be enforceable globally under the New York Convention.",
+      translation: "If founders have a dispute, they must resolve it via mediation or a fast-track arbitration in Nairobi using international rules. Founders agree not to take each other to local court, saving time, money, and ensuring the ruling is respected internationally.",
+      kenyanLawNote: "Designed under the Kenyan Arbitration Act and the New York Convention to keep shareholder disputes private, swift, and internationally enforceable, preventing public court filings."
     }
   ]
 };

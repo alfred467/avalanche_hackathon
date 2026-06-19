@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — K-ELF</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <span class="nav-name">K-ELF</span>
+      </a>
+      <div class="nav-links">
+        <a href="/#problem">The Problem</a>
+        <a href="/#how">How It Works</a>
+        <a href="/about">About</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+          <span class="sun">Light</span><span class="moon">Dark</span>
+        </button>
+        <a href="/generator" class="cta-btn-nav">Open Generator</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="problem" style="padding-top: 10rem; padding-bottom: 5rem;">
+    <div class="section-inner" style="text-align: center;">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Get in Touch</h2>
+      <p style="color: var(--c-text-2); font-size: 1.1rem; line-height: 1.6; max-width: 600px; margin: 0 auto 3rem;">
+        Whether you are a startup founder looking for guidance or an accelerator looking to deploy K-ELF across your portfolio, we are here to help.
+      </p>
+      
+      <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <div style="background: var(--c-surface); border: 1px solid var(--c-border); padding: 2rem; border-radius: 8px; min-width: 250px;">
+          <i data-lucide="mail" style="color: var(--c-green); width: 32px; height: 32px; margin-bottom: 1rem;"></i>
+          <h3 style="font-family: var(--font-h); font-size: 1.2rem; color: var(--c-text); margin-bottom: 0.5rem;">Email Support</h3>
+          <p style="color: var(--c-text-2); margin-bottom: 1rem;">support@k-elf.co.ke</p>
+          <a href="mailto:support@k-elf.co.ke" class="btn-ghost-lg" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Send Email</a>
+        </div>
+        <div style="background: var(--c-surface); border: 1px solid var(--c-border); padding: 2rem; border-radius: 8px; min-width: 250px;">
+          <i data-lucide="building" style="color: var(--c-green); width: 32px; height: 32px; margin-bottom: 1rem;"></i>
+          <h3 style="font-family: var(--font-h); font-size: 1.2rem; color: var(--c-text); margin-bottom: 0.5rem;">Enterprise Sales</h3>
+          <p style="color: var(--c-text-2); margin-bottom: 1rem;">enterprise@k-elf.co.ke</p>
+          <a href="mailto:enterprise@k-elf.co.ke" class="btn-primary-lg" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-brand-name">K-ELF</span>
+        <span class="footer-sub">Kenyan Equity Legal Framework</span>
+      </div>
+      <p class="footer-disclaimer">K-ELF provides a practical starting point, not a substitute for qualified legal advice.</p>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    const saved = localStorage.getItem('kelf-theme') || 'light';
+    root.setAttribute('data-theme', saved);
+    toggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('kelf-theme', next);
+    });
+    lucide.createIcons();
+  </script>
+</body>
+</html>

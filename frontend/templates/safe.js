@@ -4,10 +4,10 @@ const safeTemplate = {
   clauses: [
     {
       id: "safe-preamble",
-      title: "Preamble & Parties",
-      text: "This K-SAFE is issued by {{COMPANY_NAME}} (Registration No. {{REGISTRATION_NUMBER}}), a private limited company incorporated in Kenya (the 'Company'), to {{INVESTOR_NAME}} (the 'Investor') in exchange for the payment of {{INVESTMENT_AMOUNT}} (the 'Purchase Amount') on or about {{INVESTMENT_DATE}}.",
-      translation: "This is the cover page showing who is involved. The investor pays the startup {{INVESTMENT_AMOUNT}} now, in exchange for the right to get shares in the future when the company raises a larger round of funding.",
-      kenyanLawNote: "Governed by the Kenyan Companies Act, 2015. Registration number refers to the unique identifier issued by the Business Registration Service (BRS)."
+      title: "Preamble & Parties (Cross-Border Bridge)",
+      text: "This K-SAFE is issued by {{COMPANY_NAME}} (Registration No. {{REGISTRATION_NUMBER}}), a private limited company incorporated in Kenya (the 'Company'), to {{INVESTOR_NAME}} (the 'Investor') in exchange for the payment of {{INVESTMENT_AMOUNT}} (the 'Purchase Amount') on or about {{INVESTMENT_DATE}}. This instrument is drafted in direct compatibility with the United States Delaware General Corporation Law (DGCL) SAFE framework and the International Chamber of Commerce (ICC) standards, while being fully anchored in the Constitution of Kenya (Article 40 - Protection of Right to Property) and the Kenyan Companies Act, 2015.",
+      translation: "This is the cover page showing who is involved. The investor pays the startup {{INVESTMENT_AMOUNT}} now, in exchange for shares later. We explicitly state this document bridges US (Delaware) and Kenyan law, meaning a foreign investor can trust it just like an American SAFE.",
+      kenyanLawNote: "Governed by the Kenyan Companies Act, 2015 and constitutionally protected by Article 40. Legally bridges Delaware C-Corp mechanics for seamless foreign direct investment (FDI)."
     },
     {
       id: "safe-conversion",
@@ -53,10 +53,10 @@ const safeTemplate = {
     },
     {
       id: "safe-dispute-resolution",
-      title: "7. Fast-Track Out-of-Court Med-Arb",
-      text: "Any dispute arising out of this Agreement shall first be referred to mediation before a single mediator agreed upon by the parties. If unresolved within 10 days, the dispute shall be referred to final and binding arbitration by a single arbitrator who must be a legal practitioner with experience in the Kenyan tech sector. The arbitration shall take place in Nairobi, Kenya, and must be concluded within 20 days. The arbitrator's award shall be final.",
-      translation: "If there is a fight, we do not go to court (which takes years). Instead, we spend 10 days trying to talk it out with a mediator. If that fails, we have 20 days to present our case to a tech-savvy arbitrator whose decision is final.",
-      kenyanLawNote: "Enforceable under the Kenyan Arbitration Act (Cap 49), bypassing the mainstream judiciary completely and ensuring quick resolutions."
+      title: "7. Fast-Track Med-Arb (International Law Aligned)",
+      text: "Any dispute arising out of this Agreement shall first be referred to mediation before a single mediator. If unresolved within 10 days, the dispute shall be referred to final arbitration under the United Nations Commission on International Trade Law (UNCITRAL) Arbitration Rules and the Kenyan Arbitration Act, Cap 49. The arbitration shall take place in Nairobi, Kenya, be conducted in English, and conclude within 20 days. The award shall be final and enforceable internationally under the New York Convention.",
+      translation: "If there is a fight, we do not go to slow local courts. We use international arbitration rules (UNCITRAL). If the arbitrator makes a ruling, it can be enforced not just in Kenya, but globally (like in the US or UK) under the New York Convention.",
+      kenyanLawNote: "Enforceable under the Kenyan Arbitration Act (Cap 49) and internationally via the New York Convention. Bypasses the mainstream judiciary for swift foreign and local enforcement."
     }
   ]
 };

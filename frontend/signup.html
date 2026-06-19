@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up — K-ELF</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .auth-container {
+      max-width: 480px;
+      margin: 4rem auto;
+      padding: 2.5rem;
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    }
+    .auth-title {
+      font-family: var(--font-h);
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .auth-sub {
+      text-align: center;
+      color: var(--c-text-2);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .auth-step {
+      display: none;
+    }
+    .auth-step.active {
+      display: block;
+    }
+    .auth-form .field {
+      display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem;
+    }
+    .auth-form label {
+      font-size: 0.85rem; font-weight: 600; color: var(--c-text);
+    }
+    .auth-form input {
+      width: 100%; padding: 0.75rem;
+      border: 1px solid var(--c-border); border-radius: 6px;
+      background: var(--c-bg); color: var(--c-text);
+      font-family: var(--font-b);
+    }
+    .auth-form input:focus {
+      outline: none; border-color: var(--c-green);
+    }
+    .auth-footer {
+      text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--c-text-2);
+    }
+    .auth-footer a { color: var(--c-green); font-weight: 600; }
+    
+    .plan-card {
+      border: 2px solid var(--c-border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .plan-card.selected {
+      border-color: var(--c-green);
+      background: rgba(16,185,129,0.05);
+    }
+    .plan-info h4 { margin: 0 0 0.2rem 0; font-family: var(--font-h); }
+    .plan-info p { margin: 0; font-size: 0.85rem; color: var(--c-text-2); }
+    .plan-price { font-weight: bold; font-size: 1.2rem; }
+    
+    .payment-demo-badge {
+      display: inline-block;
+      background: #fef08a;
+      color: #854d0e;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .step-dot {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--c-border);
+    }
+    .step-dot.active { background: var(--c-green); }
+    
+    .btn-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .btn-row button { flex: 1; }
+  </style>
+</head>
+<body style="background: var(--c-bg);">
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <span class="nav-name">K-ELF</span>
+      </a>
+      <div class="nav-actions">
+        <a href="/login" class="cta-btn-nav" style="background: transparent; color: var(--c-text); border: 1px solid var(--c-border);">Log In</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="auth-container">
+    <h1 class="auth-title">Create Account</h1>
+    <p class="auth-sub" id="auth-subtitle">Step 1: Account Details</p>
+    
+    <div class="step-indicator">
+      <div class="step-dot active" id="dot-1"></div>
+      <div class="step-dot" id="dot-2"></div>
+      <div class="step-dot" id="dot-3"></div>
+    </div>
+    
+    <form class="auth-form" id="signup-form">
+      
+      <!-- Step 1: Details -->
+      <div class="auth-step active" id="step-1">
+        <div class="field">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" required placeholder="Jane Doe">
+        </div>
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" required placeholder="you@startup.co.ke">
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" required placeholder="••••••••">
+        </div>
+        <button type="button" class="btn-primary-lg" style="width: 100%; margin-top: 1rem;" onclick="nextStep(2)">Continue to Plan</button>
+      </div>
+
+      <!-- Step 2: Choose Plan -->
+      <div class="auth-step" id="step-2">
+        <div class="plan-card selected" onclick="selectPlan('pro', this)">
+          <div class="plan-info">
+            <h4>Pro Plan</h4>
+            <p>Full access + e-signatures</p>
+          </div>
+          <div class="plan-price">$29/mo</div>
+        </div>
+        <div class="plan-card" onclick="selectPlan('enterprise', this)">
+          <div class="plan-info">
+            <h4>Enterprise</h4>
+            <p>Unlimited documents & teams</p>
+          </div>
+          <div class="plan-price">$99/mo</div>
+        </div>
+        
+        <div class="btn-row">
+          <button type="button" class="btn-primary-lg" style="background: var(--c-surface); color: var(--c-text); border: 1px solid var(--c-border);" onclick="nextStep(1)">Back</button>
+          <button type="button" class="btn-primary-lg" onclick="nextStep(3)">Continue to Payment</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Payment (Demo) -->
+      <div class="auth-step" id="step-3">
+        <div style="text-align: center;">
+          <div class="payment-demo-badge">TEST MODE</div>
+        </div>
+        <div class="field">
+          <label for="card">Card Number (Demo)</label>
+          <input type="text" id="card" placeholder="4242 4242 4242 4242" value="4242 4242 4242 4242">
+        </div>
+        <div style="display: flex; gap: 1rem;">
+          <div class="field" style="flex: 1;">
+            <label for="exp">Expiry</label>
+            <input type="text" id="exp" placeholder="12/26" value="12/26">
+          </div>
+          <div class="field" style="flex: 1;">
+            <label for="cvc">CVC</label>
+            <input type="text" id="cvc" placeholder="123" value="123">
+          </div>
+        </div>
+        
+        <div class="btn-row">
+          <button type="button" class="btn-primary-lg" style="background: var(--c-surface); color: var(--c-text); border: 1px solid var(--c-border);" onclick="nextStep(2)">Back</button>
+          <button type="submit" class="btn-primary-lg" id="submit-btn">Pay & Create Account</button>
+        </div>
+      </div>
+      
+    </form>
+    
+    <div class="auth-footer" id="auth-footer-login">
+      Already have an account? <a href="/login">Log in</a>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+    
+    let currentPlan = 'pro';
+    
+    function selectPlan(plan, el) {
+      currentPlan = plan;
+      document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+    
+    function nextStep(step) {
+      if (step === 2) {
+        // Validate step 1
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const pass = document.getElementById('password').value;
+        if (!name || !email || !pass) {
+          alert('Please fill out all fields in Step 1.');
+          return;
+        }
+      }
+      
+      document.querySelectorAll('.auth-step').forEach(s => s.classList.remove('active'));
+      document.getElementById(`step-${step}`).classList.add('active');
+      
+      document.querySelectorAll('.step-dot').forEach((d, i) => {
+        d.classList.toggle('active', i < step);
+      });
+      
+      const subtitles = {
+        1: 'Step 1: Account Details',
+        2: 'Step 2: Choose Your Plan',
+        3: 'Step 3: Payment (Demo)'
+      };
+      document.getElementById('auth-subtitle').innerText = subtitles[step];
+      
+      document.getElementById('auth-footer-login').style.display = step === 1 ? 'block' : 'none';
+    }
+
+    const signupForm = document.getElementById('signup-form');
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const btn = document.getElementById('submit-btn');
+
+      btn.disabled = true;
+      btn.innerHTML = '<i data-lucide="loader"></i> Processing Payment...';
+      lucide.createIcons();
+
+      // Simulate network request for payment
+      setTimeout(async () => {
+        try {
+          btn.innerHTML = '<i data-lucide="check"></i> Creating Account...';
+          lucide.createIcons();
+          
+          const res = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password })
+          });
+
+          if (res.ok) {
+            // Auto login
+            await fetch('/api/auth/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, password })
+            });
+            window.location.href = '/dashboard';
+          } else {
+            const data = await res.json();
+            alert(data.error || 'Signup failed.');
+            btn.disabled = false;
+            btn.textContent = 'Pay & Create Account';
+          }
+        } catch (err) {
+          alert('Connection error. Please try again.');
+          btn.disabled = false;
+          btn.textContent = 'Pay & Create Account';
+        }
+      }, 1500); // fake delay
+    });
+  </script>
+</body>
+</html>

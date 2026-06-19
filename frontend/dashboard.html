@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — K-ELF</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body { background: var(--c-bg); min-height: 100vh; display: flex; flex-direction: column; }
+    
+    /* User Profile Dropdown */
+    .user-profile { position: relative; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid var(--c-border); background: var(--c-surface); font-weight: 600; font-size: 0.9rem; }
+    .user-profile:hover { border-color: var(--c-green); }
+    .user-profile i { width: 18px; height: 18px; color: var(--c-green); }
+    .user-dropdown { position: absolute; top: 110%; right: 0; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: none; flex-direction: column; min-width: 200px; z-index: 100; overflow: hidden; }
+    .user-dropdown.show { display: flex; }
+    .user-dropdown-header { padding: 1rem; border-bottom: 1px solid var(--c-border); background: var(--c-bg); }
+    .user-dropdown-header p { margin: 0; font-size: 0.85rem; color: var(--c-text-2); }
+    .user-dropdown-header h4 { margin: 0; font-size: 1rem; color: var(--c-text); }
+    .user-dropdown a { padding: 0.8rem 1rem; color: var(--c-text); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: background 0.2s; font-size: 0.9rem; }
+    .user-dropdown a:hover { background: var(--c-bg); color: var(--c-green); }
+    .user-dropdown a.logout { color: #ef4444; border-top: 1px solid var(--c-border); }
+    .user-dropdown a.logout:hover { background: #fef2f2; }
+
+    .dash-hero { background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(16,185,129,0.02)); padding: 4rem 1.5rem 3rem; text-align: center; border-bottom: 1px solid var(--c-border); margin-bottom: 2rem; }
+    .dash-hero h1 { font-family: var(--font-h); font-size: 2.5rem; color: var(--c-text); margin-bottom: 1rem; }
+    .dash-hero p { color: var(--c-text-2); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; }
+    .dash-container { max-width: 1100px; margin: 0 auto 3rem; padding: 0 1.5rem; flex: 1; width: 100%; }
+    .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+    .dash-header h2 { font-family: var(--font-h); font-size: 1.8rem; color: var(--c-text); }
+    .dash-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+    .dash-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+    .dash-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-color: var(--c-green); }
+    .dash-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--c-border); }
+    .dash-card-title { font-weight: 700; font-size: 1.2rem; color: var(--c-text); display: flex; align-items: center; gap: 0.5rem; }
+    .dash-card-title i { color: var(--c-green); width: 22px; height: 22px; }
+    .dash-card-status { font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 20px; text-transform: uppercase; background: rgba(245,158,11,0.1); color: #d97706; }
+    .dash-card-status.signed { background: rgba(16,185,129,0.1); color: var(--c-green); }
+    .dash-card-desc { color: var(--c-text-2); font-size: 0.95rem; margin-bottom: 1.5rem; flex: 1; line-height: 1.6; }
+    .dash-card-actions { display: flex; gap: 0.8rem; }
+    
+    .empty-state { text-align: center; padding: 5rem 2rem; background: var(--c-surface); border: 2px dashed var(--c-border); border-radius: 16px; transition: border-color 0.3s; }
+    .empty-state:hover { border-color: var(--c-green); }
+    .empty-state i { width: 64px; height: 64px; color: var(--c-text-3); margin-bottom: 1.5rem; }
+    .empty-state h3 { font-family: var(--font-h); font-size: 1.4rem; color: var(--c-text); margin-bottom: 0.5rem; }
+    .empty-state p { color: var(--c-text-2); font-size: 1.05rem; margin-bottom: 2rem; max-width: 400px; margin-left: auto; margin-right: auto; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand"><span class="nav-name">K-ELF</span></a>
+      <div class="nav-actions">
+        <a href="/generator" class="cta-btn-nav" style="background: transparent; color: var(--c-text); border: 1px solid var(--c-border);"><i data-lucide="plus"></i> New Document</a>
+        <div class="user-profile" id="user-profile-btn">
+          <i data-lucide="user"></i> <span id="user-name-display">Loading...</span>
+          <div class="user-dropdown" id="user-dropdown">
+            <div class="user-dropdown-header">
+              <h4 id="dropdown-name">User</h4>
+              <p id="dropdown-email">user@example.com</p>
+            </div>
+            <a href="/dashboard"><i data-lucide="folder"></i> My Documents</a>
+            <a href="/api/auth/logout" class="logout"><i data-lucide="log-out"></i> Log Out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dash-hero">
+    <h1>Welcome to your Legal Vault</h1>
+    <p>Manage, negotiate, and sign your Kenyan startup agreements in one secure place.</p>
+    <button class="btn-primary-lg" onclick="window.location.href='/generator'"><i data-lucide="plus"></i> Create New Document</button>
+  </div>
+
+  <main class="dash-container">
+    <div class="dash-header">
+      <h2>Recent Documents</h2>
+    </div>
+
+    <div id="docs-list" class="dash-cards">
+      <!-- Injected by JS -->
+      <div class="empty-state" style="grid-column: 1 / -1;">
+        <i data-lucide="folder-open"></i>
+        <h3>No documents yet</h3>
+        <p>Create your first K-SAFE or K-FOUNDER agreement to invite signers.</p>
+        <button class="btn-primary-lg" onclick="window.location.href='/generator'">Start Generating</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    // User Profile Dropdown Toggle
+    const userBtn = document.getElementById('user-profile-btn');
+    const userDropdown = document.getElementById('user-dropdown');
+    userBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      userDropdown.classList.toggle('show');
+    });
+    document.addEventListener('click', () => {
+      userDropdown.classList.remove('show');
+    });
+
+    // Fetch user profile
+    async function loadProfile() {
+      try {
+        const res = await fetch('/api/auth/me');
+        if (res.ok) {
+          const data = await res.json();
+          document.getElementById('user-name-display').innerText = data.user.name.split(' ')[0];
+          document.getElementById('dropdown-name').innerText = data.user.name;
+          document.getElementById('dropdown-email').innerText = data.user.email;
+        }
+      } catch(e) {}
+    }
+    loadProfile();
+
+    // Fetch user documents
+    async function loadDocs() {
+      try {
+        const res = await fetch('/api/documents');
+        if (res.status === 401) { window.location.href = '/login'; return; }
+        const data = await res.json();
+        const list = document.getElementById('docs-list');
+        
+        if (data.documents && data.documents.length > 0) {
+          list.innerHTML = data.documents.map(d => `
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div class="dash-card-title">
+                  <i data-lucide="file-text"></i> ${d.title}
+                </div>
+                <div class="dash-card-status ${d.status === 'signed' ? 'signed' : ''}">${d.status.replace('_', ' ')}</div>
+              </div>
+              <div class="dash-card-desc">
+                <strong>Type:</strong> ${d.doc_type === 'safe' ? 'K-SAFE' : 'K-FOUNDER'}<br>
+                <strong>Second Party:</strong> ${d.second_party_email || 'Not invited yet'}<br>
+                <strong>Signatures:</strong> ${d.creator_signed ? 'You ✓' : 'You ✗'} | ${d.second_party_signed ? 'Them ✓' : 'Them ✗'}
+              </div>
+              <div class="dash-card-actions">
+                <button class="btn-primary-lg" style="padding: 0.5rem 1rem; font-size: 0.85rem;" onclick="openDoc(${d.id})">View / Sign</button>
+                ${!d.second_party_email ? `<button class="btn-primary-lg" style="padding: 0.5rem 1rem; font-size: 0.85rem; background: var(--c-surface); color: var(--c-text); border: 1px solid var(--c-border);" onclick="invite(${d.id})">Invite Party</button>` : ''}
+              </div>
+            </div>
+          `).join('');
+          lucide.createIcons();
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function openDoc(id) {
+      window.location.href = `/generator?id=${id}`;
+    }
+
+    async function invite(id) {
+      const email = prompt("Enter the email of the second party to invite:");
+      if (!email) return;
+      await fetch(`/api/documents/${id}/invite`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ email })
+      });
+      loadDocs();
+    }
+
+    loadDocs();
+  </script>
+</body>
+</html>
