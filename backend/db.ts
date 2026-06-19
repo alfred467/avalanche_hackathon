@@ -53,25 +53,28 @@ export function initDb() {
       password VARCHAR(255) NOT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`, [], (err) => {
-      if (err) console.error('Error creating users table:', err.message);
-      else console.log('✅ Users table ready');
-    });
-
-    db.run(`CREATE TABLE IF NOT EXISTS documents (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      title VARCHAR(255) NOT NULL,
-      doc_type VARCHAR(50) NOT NULL,
-      content LONGTEXT NOT NULL,
-      creator_id INT NOT NULL,
-      second_party_email VARCHAR(255),
-      status VARCHAR(50) DEFAULT 'draft',
-      creator_signed TINYINT(1) DEFAULT 0,
-      second_party_signed TINYINT(1) DEFAULT 0,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (creator_id) REFERENCES users (id)
-    )`, [], (err) => {
-      if (err) console.error('Error creating documents table:', err.message);
-      else console.log('✅ Documents table ready');
+      if (err) {
+        console.error('Error creating users table:', err.message);
+        return;
+      }
+      console.log('✅ Users table ready');
+      
+      db.run(`CREATE TABLE IF NOT EXISTS documents (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        doc_type VARCHAR(50) NOT NULL,
+        content LONGTEXT NOT NULL,
+        creator_id INT NOT NULL,
+        second_party_email VARCHAR(255),
+        status VARCHAR(50) DEFAULT 'draft',
+        creator_signed TINYINT(1) DEFAULT 0,
+        second_party_signed TINYINT(1) DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (creator_id) REFERENCES users (id) ON DELETE CASCADE
+      )`, [], (err) => {
+        if (err) console.error('Error creating documents table:', err.message);
+        else console.log('✅ Documents table ready');
+      });
     });
   });
 }
