@@ -5,13 +5,13 @@ const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'kelf',
+  database: process.env.DB_NAME || 'kelper',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
 });
 
-// Create a wrapper object that matches the sqlite3 interface used in server.ts
+
 export const db = {
   run: (sql: string, params: any[] = [], callback?: (this: any, err: Error | null) => void) => {
     pool.query(sql, params, (err, results: any) => {
@@ -37,25 +37,41 @@ export const db = {
 };
 
 export function initDb() {
-  db.run(`CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  )`);
+  // Test connection first
+  pool.getConnection((err, conn) => {
+    if (err) {
+      console.error('❌ Database connection failed. Please ensure MySQL is running, credentials are correct in .env, and the database exists.', err.message);
+      return;
+    }
+    console.log('✅ Connected to MySQL database');
+    conn.release();
 
-  db.run(`CREATE TABLE IF NOT EXISTS documents (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    doc_type VARCHAR(50) NOT NULL,
-    content LONGTEXT NOT NULL,
-    creator_id INT NOT NULL,
-    second_party_email VARCHAR(255),
-    status VARCHAR(50) DEFAULT 'draft',
-    creator_signed TINYINT(1) DEFAULT 0,
-    second_party_signed TINYINT(1) DEFAULT 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (creator_id) REFERENCES users (id)
-  )`);
+    db.run(`CREATE TABLE IF NOT EXISTS users (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      email VARCHAR(255) UNIQUE NOT NULL,
+      password VARCHAR(255) NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )`, [], (err) => {
+      if (err) console.error('Error creating users table:', err.message);
+      else console.log('✅ Users table ready');
+    });
+
+    db.run(`CREATE TABLE IF NOT EXISTS documents (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      title VARCHAR(255) NOT NULL,
+      doc_type VARCHAR(50) NOT NULL,
+      content LONGTEXT NOT NULL,
+      creator_id INT NOT NULL,
+      second_party_email VARCHAR(255),
+      status VARCHAR(50) DEFAULT 'draft',
+      creator_signed TINYINT(1) DEFAULT 0,
+      second_party_signed TINYINT(1) DEFAULT 0,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (creator_id) REFERENCES users (id)
+    )`, [], (err) => {
+      if (err) console.error('Error creating documents table:', err.message);
+      else console.log('✅ Documents table ready');
+    });
+  });
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us — K-ELF</title>
+  <title>Contact Us — Kelper</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="landing.css">
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -13,7 +13,7 @@
   <nav class="nav">
     <div class="nav-inner">
       <a href="/" class="nav-brand">
-        <span class="nav-name">K-ELF</span>
+        <span class="nav-name">Kelper</span>
       </a>
       <div class="nav-links">
         <a href="/#problem">The Problem</a>
@@ -36,7 +36,7 @@
       <div class="section-label">Contact</div>
       <h2 class="section-title">Get in Touch</h2>
       <p style="color: var(--c-text-2); font-size: 1.1rem; line-height: 1.6; max-width: 600px; margin: 0 auto 3rem;">
-        Whether you are a startup founder looking for guidance or an accelerator looking to deploy K-ELF across your portfolio, we are here to help.
+        Whether you are a startup founder looking for guidance or an accelerator looking to deploy Kelper across your portfolio, we are here to help.
       </p>
       
       <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
@@ -59,22 +59,22 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <span class="footer-brand-name">K-ELF</span>
+        <span class="footer-brand-name">Kelper</span>
         <span class="footer-sub">Kenyan Equity Legal Framework</span>
       </div>
-      <p class="footer-disclaimer">K-ELF provides a practical starting point, not a substitute for qualified legal advice.</p>
+      <p class="footer-disclaimer">Kelper provides a practical starting point, not a substitute for qualified legal advice.</p>
     </div>
   </footer>
 
   <script>
     const toggle = document.getElementById('theme-toggle');
     const root = document.documentElement;
-    const saved = localStorage.getItem('kelf-theme') || 'light';
+    const saved = localStorage.getItem('kelper-theme') || 'light';
     root.setAttribute('data-theme', saved);
     toggle.addEventListener('click', () => {
       const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
-      localStorage.setItem('kelf-theme', next);
+      localStorage.setItem('kelper-theme', next);
     });
     lucide.createIcons();
   </script>

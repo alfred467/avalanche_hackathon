@@ -1,7 +1,7 @@
-# K-ELF (Kenyan Equity Legal Framework) System Architecture
+# Kelper (Kenyan Equity Legal Framework) System Architecture
 
 ## Overview
-K-ELF is an interactive web-based legal document generator tailored to the Kenyan startup ecosystem, compliant with the Companies Act 2015, Constitution of Kenya, and internationally recognized legal standards.
+Kelper is an interactive web-based legal document generator tailored to the Kenyan startup ecosystem, compliant with the Companies Act 2015, Constitution of Kenya, and internationally recognized legal standards.
 
 ## Tech Stack
 - **Backend:** Node.js, TypeScript
@@ -25,8 +25,8 @@ The core controller for the document generator.
 - **AI Wizard Integration:** Manages the conversational modal where users describe their company, taking the Groq API JSON response and mapping it directly to form fields.
 
 ### 3. Legal Templates (`templates/`)
-- `safe.js`: Defines the K-SAFE (Simple Agreement for Future Equity) document structure, boilerplate clauses, plain English translations, and Kenyan legal context.
-- `founder.js`: Defines the K-FOUNDER agreement for co-founder vesting schedules and IP assignment.
+- `safe.js`: Defines the Kelper-SAFE (Simple Agreement for Future Equity) document structure, boilerplate clauses, plain English translations, and Kenyan legal context.
+- `founder.js`: Defines the Kelper-FOUNDER agreement for co-founder vesting schedules and IP assignment.
 
 ### 4. User Interface (`generator.html` & `wizard.css`)
 Provides a dual-pane workspace:

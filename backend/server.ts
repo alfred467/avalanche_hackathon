@@ -12,7 +12,7 @@ initDb();
 const PORT = 8080;
 const ROOT = path.resolve(__dirname, '..');
 const FRONTEND = path.join(ROOT, 'frontend');
-const JWT_SECRET = process.env.JWT_SECRET || 'kelf_super_secret_hackathon_key';
+const JWT_SECRET = process.env.JWT_SECRET || 'kelper_super_secret_hackathon_key';
 
 const MIME_TYPES: Record<string, string> = {
   '.html': 'text/html',
@@ -66,13 +66,23 @@ const server = http.createServer((req: http.IncomingMessage, res: http.ServerRes
   const urlObj = new URL(req.url || '/', `http://localhost:${PORT}`);
   const urlPath = urlObj.pathname;
 
-  // ── Auth Endpoints ────────────────────────────────────────────────────────
+  
   if (urlPath === '/api/auth/register' && req.method === 'POST') {
     let body = '';
     req.on('data', chunk => body += chunk);
     req.on('end', async () => {
       try {
         const { name, email, password } = JSON.parse(body);
+        if (!name || !email || !password) {
+          res.writeHead(400); res.end(JSON.stringify({ error: 'All fields are required' })); return;
+        }
+        if (password.length < 6) {
+          res.writeHead(400); res.end(JSON.stringify({ error: 'Password must be at least 6 characters' })); return;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          res.writeHead(400); res.end(JSON.stringify({ error: 'Invalid email format' })); return;
+        }
         const hash = await bcrypt.hash(password, 10);
         db.run('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', [name, email, hash], function (err) {
           if (err) { res.writeHead(400); res.end(JSON.stringify({ error: 'Email exists' })); return; }
@@ -142,9 +152,20 @@ const server = http.createServer((req: http.IncomingMessage, res: http.ServerRes
     req.on('data', chunk => body += chunk);
     req.on('end', () => {
       const { title, doc_type, content, second_party_email } = JSON.parse(body);
+      if (!title || !doc_type || !content) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Title, document type, and content are required' }));
+        return;
+      }
       if (!second_party_email) {
         res.writeHead(400, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'Second party email is required to create a document' }));
+        return;
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(second_party_email)) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Invalid second party email format' }));
         return;
       }
       db.run('INSERT INTO documents (title, doc_type, content, creator_id, second_party_email) VALUES (?, ?, ?, ?, ?)',
@@ -190,7 +211,7 @@ const server = http.createServer((req: http.IncomingMessage, res: http.ServerRes
           body: JSON.stringify({
             model: 'llama3-8b-8192',
             messages: [
-              { role: 'system', content: 'You are a Kenyan legal AI assistant for K-ELF.' },
+              { role: 'system', content: 'You are a Kenyan legal AI assistant for Kelper.' },
               { role: 'user', content: prompt }
             ]
           })
@@ -241,7 +262,7 @@ const server = http.createServer((req: http.IncomingMessage, res: http.ServerRes
     return;
   }
 
-  // ── Route Protection ──────────────────────────────────────────────────
+  
   const user = getUserFromReq(req);
   if (!user && (urlPath === '/generator' || urlPath === '/dashboard')) {
     res.writeHead(302, { 'Location': '/login' });
@@ -249,14 +270,14 @@ const server = http.createServer((req: http.IncomingMessage, res: http.ServerRes
     return;
   }
 
-  // Auto-redirect logged-in users away from auth pages
+  
   if (user && (urlPath === '/login' || urlPath === '/signup' || urlPath === '/')) {
     res.writeHead(302, { 'Location': '/dashboard' });
     res.end();
     return;
   }
 
-  // ── Clean Routes ─────────────────────────────────────────────────────────
+  
   if (cleanRoutes[urlPath]) {
     const filePath = cleanRoutes[urlPath];
     const ext = path.extname(filePath).toLowerCase();
@@ -269,7 +290,7 @@ const server = http.createServer((req: http.IncomingMessage, res: http.ServerRes
     return;
   }
 
-  // ── Static Asset Serving ─────────────────────────────────────────────────
+  
   const candidates: string[] = [
     path.join(ROOT, urlPath),
     path.join(FRONTEND, urlPath),
@@ -297,5 +318,5 @@ const server = http.createServer((req: http.IncomingMessage, res: http.ServerRes
 });
 
 server.listen(PORT, () => {
-  console.log(`✅  K-ELF server running → http://localhost:${PORT}/`);
+  console.log(`✅  Kelper server running → http://localhost:${PORT}/`);
 });

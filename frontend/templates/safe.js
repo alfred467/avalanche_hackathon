@@ -1,11 +1,11 @@
 const safeTemplate = {
-  title: "KENYAN SIMPLE AGREEMENT FOR FUTURE EQUITY (K-SAFE)",
+  title: "KENYAN SIMPLE AGREEMENT FOR FUTURE EQUITY (Kelper-SAFE)",
   introduction: "This Agreement is entered into under the laws of the Republic of Kenya (specifically the Companies Act, 2015) between the Company and the Investor.",
   clauses: [
     {
       id: "safe-preamble",
       title: "Preamble & Parties (Cross-Border Bridge)",
-      text: "This K-SAFE is issued by {{COMPANY_NAME}} (Registration No. {{REGISTRATION_NUMBER}}), a private limited company incorporated in Kenya (the 'Company'), to {{INVESTOR_NAME}} (the 'Investor') in exchange for the payment of {{INVESTMENT_AMOUNT}} (the 'Purchase Amount') on or about {{INVESTMENT_DATE}}. This instrument is drafted in direct compatibility with the United States Delaware General Corporation Law (DGCL) SAFE framework and the International Chamber of Commerce (ICC) standards, while being fully anchored in the Constitution of Kenya (Article 40 - Protection of Right to Property) and the Kenyan Companies Act, 2015.",
+      text: "This Kelper-SAFE is issued by {{COMPANY_NAME}} (Registration No. {{REGISTRATION_NUMBER}}), a private limited company incorporated in Kenya (the 'Company'), to {{INVESTOR_NAME}} (the 'Investor') in exchange for the payment of {{INVESTMENT_AMOUNT}} (the 'Purchase Amount') on or about {{INVESTMENT_DATE}}. This instrument is drafted in direct compatibility with the United States Delaware General Corporation Law (DGCL) SAFE framework and the International Chamber of Commerce (ICC) standards, while being fully anchored in the Constitution of Kenya (Article 40 - Protection of Right to Property) and the Kenyan Companies Act, 2015.",
       translation: "This is the cover page showing who is involved. The investor pays the startup {{INVESTMENT_AMOUNT}} now, in exchange for shares later. We explicitly state this document bridges US (Delaware) and Kenyan law, meaning a foreign investor can trust it just like an American SAFE.",
       kenyanLawNote: "Governed by the Kenyan Companies Act, 2015 and constitutionally protected by Article 40. Legally bridges Delaware C-Corp mechanics for seamless foreign direct investment (FDI)."
     },
@@ -19,7 +19,7 @@ const safeTemplate = {
     {
       id: "safe-salary-cap",
       title: "2. Anti-Siphoning: Founder Salary Cap",
-      text: "Until this K-SAFE converts into equity or is terminated, the monthly gross salary, consulting fees, or any other cash compensation paid to each Founder (including {{FOUNDER_NAMES}}) shall not exceed {{FOUNDER_SALARY_CAP}} KES, unless approved in writing by the Investor or a majority of SAFE Holders.",
+      text: "Until this Kelper-SAFE converts into equity or is terminated, the monthly gross salary, consulting fees, or any other cash compensation paid to each Founder (including {{FOUNDER_NAMES}}) shall not exceed {{FOUNDER_SALARY_CAP}} KES, unless approved in writing by the Investor or a majority of SAFE Holders.",
       translation: "Founders cannot pay themselves massive salaries from the investor's money. Their monthly pay is strictly capped at {{FOUNDER_SALARY_CAP}} KES. This keeps the money focused on building the product.",
       kenyanLawNote: "Avoids the common loophole where founders route investor cash straight into their personal bank accounts under the guise of 'directors' fees' or 'market salaries'."
     },
@@ -65,4 +65,4 @@ if (typeof module !== 'undefined') {
   module.exports = safeTemplate;
 }
 
-// Kenyan Equity Legal Framework - Phase 1 - K-SAFE Template definition with anti-siphoning and Kenyan law clauses
+

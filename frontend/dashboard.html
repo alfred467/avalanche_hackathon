@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard — K-ELF</title>
+  <title>Dashboard — Kelper</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="landing.css">
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -52,7 +52,7 @@
 
   <nav class="nav">
     <div class="nav-inner">
-      <a href="/" class="nav-brand"><span class="nav-name">K-ELF</span></a>
+      <a href="/" class="nav-brand"><span class="nav-name">Kelper</span></a>
       <div class="nav-actions">
         <a href="/generator" class="cta-btn-nav" style="background: transparent; color: var(--c-text); border: 1px solid var(--c-border);"><i data-lucide="plus"></i> New Document</a>
         <div class="user-profile" id="user-profile-btn">
@@ -82,11 +82,11 @@
     </div>
 
     <div id="docs-list" class="dash-cards">
-      <!-- Injected by JS -->
+      
       <div class="empty-state" style="grid-column: 1 / -1;">
         <i data-lucide="folder-open"></i>
         <h3>No documents yet</h3>
-        <p>Create your first K-SAFE or K-FOUNDER agreement to invite signers.</p>
+        <p>Create your first Kelper-SAFE or Kelper-FOUNDER agreement to invite signers.</p>
         <button class="btn-primary-lg" onclick="window.location.href='/generator'">Start Generating</button>
       </div>
     </div>
@@ -138,7 +138,7 @@
                 <div class="dash-card-status ${d.status === 'signed' ? 'signed' : ''}">${d.status.replace('_', ' ')}</div>
               </div>
               <div class="dash-card-desc">
-                <strong>Type:</strong> ${d.doc_type === 'safe' ? 'K-SAFE' : 'K-FOUNDER'}<br>
+                <strong>Type:</strong> ${d.doc_type === 'safe' ? 'Kelper-SAFE' : 'Kelper-FOUNDER'}<br>
                 <strong>Second Party:</strong> ${d.second_party_email || 'Not invited yet'}<br>
                 <strong>Signatures:</strong> ${d.creator_signed ? 'You ✓' : 'You ✗'} | ${d.second_party_signed ? 'Them ✓' : 'Them ✗'}
               </div>

@@ -1,5 +1,5 @@
 # Changelog
-All notable changes to the K-ELF (Kenyan Equity Legal Framework) project will be documented in this file.
+All notable changes to the Kelper (Kenyan Equity Legal Framework) project will be documented in this file.
 
 ## [Unreleased] - MVP Version
 

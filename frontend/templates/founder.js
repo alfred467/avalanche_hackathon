@@ -1,5 +1,5 @@
 const founderTemplate = {
-  title: "KENYAN FOUNDER COLLABORATION & EQUITY AGREEMENT (K-FOUNDER)",
+  title: "KENYAN FOUNDER COLLABORATION & EQUITY AGREEMENT (Kelper-FOUNDER)",
   introduction: "This Agreement governs the relationship, equity vesting, intellectual property, and roles of the Founders of the Company under the Kenyan Companies Act, 2015.",
   clauses: [
     {
@@ -51,4 +51,4 @@ if (typeof module !== 'undefined') {
   module.exports = founderTemplate;
 }
 
-// Kenyan Equity Legal Framework - Phase 1 - K-FOUNDER Template definition with vesting and power of attorney clauses
+

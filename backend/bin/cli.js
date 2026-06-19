@@ -16,7 +16,7 @@ const questions = [
   { key: 'companyName', query: 'Enter Company Name (e.g. Safi Tech Limited): ', default: 'Safi Tech Limited' },
   { key: 'regNumber', query: 'Enter Kenyan Registration Number (e.g. PVT-DLUX89Z): ', default: 'PVT-DLUX89Z' },
   { key: 'founders', query: 'Enter Founder Names (comma-separated): ', default: 'Jane Koech, Peter Omondi' },
-  { key: 'investorName', query: 'Enter Investor Name (for K-SAFE): ', default: 'Nairobi Capital Partners' },
+  { key: 'investorName', query: 'Enter Investor Name (for Kelper-SAFE): ', default: 'Nairobi Capital Partners' },
   { key: 'investmentAmount', query: 'Enter SAFE Investment Amount (KES): ', default: '5,000,000' },
   { key: 'valuationCap', query: 'Enter Valuation Cap (KES): ', default: '100,000,000' },
   { key: 'salaryCap', query: 'Enter Founder Monthly Salary Cap (KES): ', default: '200,000' },
@@ -119,7 +119,7 @@ function generateFiles() {
   
   const safePath = path.join(process.cwd(), 'K_SAFE_Agreement.md');
   fs.writeFileSync(safePath, safeContent, 'utf8');
-  console.log(`✅ Created K-SAFE Agreement: ${safePath}`);
+  console.log(`✅ Created Kelper-SAFE Agreement: ${safePath}`);
 
   let founderContent = `# ${founderTemplate.title}\n\n`;
   founderContent += `${substitute(founderTemplate.introduction)}\n\n`;
@@ -134,7 +134,7 @@ function generateFiles() {
   
   const founderPath = path.join(process.cwd(), 'K_FOUNDER_Agreement.md');
   fs.writeFileSync(founderPath, founderContent, 'utf8');
-  console.log(`✅ Created K-FOUNDER Agreement: ${founderPath}`);
+  console.log(`✅ Created Kelper-FOUNDER Agreement: ${founderPath}`);
 
   const configPath = path.join(process.cwd(), 'k-legal.json');
   fs.writeFileSync(configPath, JSON.stringify(answers, null, 2), 'utf8');
@@ -143,7 +143,7 @@ function generateFiles() {
   console.log('🎉 Generation complete. Run a web server to open frontend/index.html for the interactive translator.');
 }
 
-console.log('=== K-ELF: Kenyan Equity Legal Framework CLI ===');
+console.log('=== Kelper: Kenyan Equity Legal Framework CLI ===');
 askQuestion(0);
 
-// Kenyan Equity Legal Framework - Phase 1 Command Line Interface
+

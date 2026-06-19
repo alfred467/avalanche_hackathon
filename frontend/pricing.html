@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricing — K-ELF</title>
+  <title>Pricing — Kelper</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="landing.css">
   <link rel="stylesheet" href="pricing.css">
@@ -14,7 +14,7 @@
   <nav class="nav">
     <div class="nav-inner">
       <a href="/" class="nav-brand">
-        <span class="nav-name">K-ELF</span>
+        <span class="nav-name">Kelper</span>
       </a>
       <div class="nav-links">
         <a href="/#problem">The Problem</a>
@@ -43,14 +43,14 @@
   <section class="pricing-cards">
     <div class="section-inner pricing-grid">
       
-      <!-- Free Tier -->
+      
       <div class="pricing-card">
         <h3>Founder Basic</h3>
         <div class="price">Free<span> / forever</span></div>
         <p class="price-desc">Perfect for early-stage founders just getting started.</p>
         <a href="/generator" class="btn-ghost-lg">Get Started</a>
         <ul class="feature-list">
-          <li><i data-lucide="check"></i> Generate K-SAFE & K-FOUNDER</li>
+          <li><i data-lucide="check"></i> Generate Kelper-SAFE & Kelper-FOUNDER</li>
           <li><i data-lucide="check"></i> Export to Markdown & PDF</li>
           <li><i data-lucide="check"></i> Plain English Translations</li>
           <li><i data-lucide="check"></i> Local Auto-Save</li>
@@ -58,7 +58,7 @@
         </ul>
       </div>
 
-      <!-- Pro Tier -->
+      
       <div class="pricing-card popular">
         <div class="popular-badge">Most Popular</div>
         <h3>Pro Startup</h3>
@@ -79,7 +79,7 @@
         </ul>
       </div>
 
-      <!-- Enterprise -->
+      
       <div class="pricing-card">
         <h3>Enterprise / VC Hubs</h3>
         <div class="price">KSh 15,000<span> / month</span></div>
@@ -123,7 +123,7 @@
         <div class="feat-box"><strong>17. Side-Hustle Declaration</strong> Automated non-compete/moonlighting waivers.</div>
         <div class="feat-box"><strong>18. Corporate Veil Waiver</strong> Personal fraud guarantees.</div>
         <div class="feat-box"><strong>19. Deal Term Variables</strong> Fill in the blanks UI pattern.</div>
-        <div class="feat-box"><strong>20. K-SAFE Conversion Mechanics</strong> Kenyan share allotment compliance.</div>
+        <div class="feat-box"><strong>20. Kelper-SAFE Conversion Mechanics</strong> Kenyan share allotment compliance.</div>
         <div class="feat-box"><strong>21. Document Reset</strong> One-click clear data state.</div>
         <div class="feat-box"><strong>22. One-click Copy</strong> Send terms to WhatsApp/Email.</div>
         <div class="feat-box"><strong>23. Responsive Layout</strong> Mobile-friendly onboarding.</div>
@@ -141,22 +141,22 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <span class="footer-brand-name">K-ELF</span>
+        <span class="footer-brand-name">Kelper</span>
         <span class="footer-sub">Kenyan Equity Legal Framework</span>
       </div>
-      <p class="footer-disclaimer">K-ELF provides a practical starting point, not a substitute for qualified legal advice.</p>
+      <p class="footer-disclaimer">Kelper provides a practical starting point, not a substitute for qualified legal advice.</p>
     </div>
   </footer>
 
   <script>
     const toggle = document.getElementById('theme-toggle');
     const root = document.documentElement;
-    const saved = localStorage.getItem('kelf-theme') || 'light';
+    const saved = localStorage.getItem('kelper-theme') || 'light';
     root.setAttribute('data-theme', saved);
     toggle.addEventListener('click', () => {
       const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
-      localStorage.setItem('kelf-theme', next);
+      localStorage.setItem('kelper-theme', next);
     });
     lucide.createIcons();
   </script>
